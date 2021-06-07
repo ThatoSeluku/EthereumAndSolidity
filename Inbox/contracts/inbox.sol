@@ -6,7 +6,7 @@ contract Inbox{
     //Create a public variable called message
     string public message;
 
-//Create Inbox constructor function: These are autocalled everytime contract is deployed    
+    //Create Inbox constructor function: These are autocalled everytime contract is deployed    
     function Inbox(string initMessage)public{
         message = initMessage;
     }
