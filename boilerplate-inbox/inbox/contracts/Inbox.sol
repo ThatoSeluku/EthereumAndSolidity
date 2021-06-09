@@ -7,15 +7,13 @@ contract Inbox{
     string public message;
 
     //Create Inbox constructor function: These are autocalled everytime contract is deployed    
-    function Inbox(string initMessage)public{
+    function Inbox(string initMessage) public{
         message = initMessage;
     }
     
     function setMessage(string newMessage)public {
         message = newMessage;
     }
-    
-
 }
 
 /*
