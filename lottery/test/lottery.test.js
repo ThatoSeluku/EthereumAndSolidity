@@ -9,10 +9,16 @@ let lottery;
 let accounts;
 
 beforeEach(async ()=>{
-
     accounts = await web3.eth.getAccounts();
     lottery = await new web3.eth.Contract(JSON.parse(interface))
         .deploy({data: bytecode})
         .send({from: acoounts[0], gas: '1000000'});
+});
 
+describe('Lottery Contract', ()=>{
+    //Create a describe statement that ensures contract was successfully deployed 
+    it('deploys a contract', ()=>{
+assert.ok(lottery.options.address);
+
+    })
 });
