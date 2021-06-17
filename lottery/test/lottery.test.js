@@ -18,7 +18,6 @@ beforeEach(async ()=>{
 describe('Lottery Contract', ()=>{
     //Create a describe statement that ensures contract was successfully deployed 
     it('deploys a contract', ()=>{
-assert.ok(lottery.options.address);
-
+    assert.ok(lottery.options.address);
     })
 });
