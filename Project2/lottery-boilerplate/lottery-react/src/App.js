@@ -4,7 +4,7 @@ import lottery from './lottery';
 import web3 from './web3';
 import React, { Component } from 'react'
 
-
+//App component that initializes values of state
 class App extends Component {
   //web3.eth.getAccounts().then(console.log);
 state= {
@@ -15,6 +15,7 @@ state= {
   message:''
 };
   
+//This is called automatically as data is pulled from contract
   async componentDidMount(){
     const manager = await lottery.methods.manager().call();
     const players = await lottery.methods.getPlayers().call();
@@ -24,7 +25,7 @@ state= {
 
 onSubmit= async (event) =>{
 event.preventDefault();
-//Get list of _accounts
+//Get list of _accounts provided by metamask
 const accounts = await web3.eth.getAccounts();
 this.setState({message: 'Waiting on transaction to complete...'})
 
@@ -52,6 +53,7 @@ this.setState({message: 'A winner is selected!'})
   
   <div>
     <h2>Lottery Contract</h2>
+    {/* Read from state */}
     <p>This contract is managed by {this.state.manager}</p>
    
 <p>There are currently {this.state.players.length} players in this raffle and you stand a chance to win {web3.utils.fromWei(this.state.balance, 'ether')} ether!</p>
