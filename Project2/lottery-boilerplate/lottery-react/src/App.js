@@ -11,7 +11,8 @@ state= {
   manager: '',
   players:[],
   balance: '',
-  value: ''
+  value: '',
+  message:''
 };
   
   async componentDidMount(){
@@ -25,12 +26,26 @@ onSubmit= async (event) =>{
 event.preventDefault();
 //Get list of _accounts
 const accounts = await web3.eth.getAccounts();
+this.setState({message: 'Waiting on transaction to complete...'})
+
 await lottery.methods.enter().send({
   from: accounts[0],
   value: web3.utils.toWei(this.state.value, 'ether')
 })
+
+
+this.setState({message: 'You have been entered!'})
 }
 
+onClick= async() =>{
+const accounts = await web3.eth.getAccounts();
+
+this.setState({message: 'Wait a sec... Randomly picking winner'});
+await lottery.methods.pickWinner().send({
+  from: accounts[0]
+})
+this.setState({message: 'A winner is selected!'})
+};
 
  render(){
   return (
@@ -53,7 +68,15 @@ await lottery.methods.enter().send({
   </div>
   <button>Enter!</button>
   </form>
+  <hr />
+<h4>Select The Lottery Winner?</h4>
+<button onClick={this.onClick}>Pick Your Winner!</button>
+<hr />
+  <h1>{this.state.message}</h1>
 </div>
+
+
+
   );
 }
 }
