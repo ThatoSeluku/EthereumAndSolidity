@@ -71,7 +71,7 @@ assert.strictEqual(accounts[3], players[3]);
 assert.strictEqual(4, players.length);
   });
 
-  it('requires a minimum amount of ether to enter', async()=>{
+  it('Requires a minimum amount of ether to enter', async()=>{
 try{
     await lottery.methods.enter().send({
       from: accounts[0],
@@ -93,4 +93,25 @@ try{
       assert(err);
     }
   })
+
+it('sends money to the winner and resets the players array', async()=>{
+
+//enter a player into the contract:
+await lottery.methods.enter().send({
+  //Enter contact from first account
+  from: accounts[0],
+  value: web3.utils.toWei('2', 'ether')
 });
+
+//Throw any address and you can get the amount of ether
+const initialBalance = await web3.eth.getBalance(accounts[0]);
+//Receive money back
+await lottery.methods.pickWinner().send({from: accounts[0]});
+const finalBalance = await web3.eth.getBalance(accounts[0]);
+const difference = finalBalance - initialBalance;
+
+assert(difference>web3.utils.toWei('1.8', 'ether'));
+});
+
+});
+ 
