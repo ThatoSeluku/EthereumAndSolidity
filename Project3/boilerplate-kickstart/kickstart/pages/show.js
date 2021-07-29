@@ -1,6 +1,5 @@
-import React from 'react';
+import React from "react";
 
-export default ()=>{
-    return(
-        <h1>New show just began</h1>
-    )};
+export default () => {
+  return <h1>Welcome to the show page!!!</h1>;
+};

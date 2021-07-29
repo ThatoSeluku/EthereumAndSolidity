@@ -1,21 +1,19 @@
-const path = require("path");
-const solc = require("solc");
-const fs = require("fs-extra");
+import { resolve } from "path";
+import { compile } from "solc";
+import { removeSync, readFileSync, ensureDirSync, outputJsonSync } from "fs-extra";
 
-const buildPath = path.resolve(__dirname, "build");
-fs.removeSync(buildPath);
+const buildPath = resolve(__dirname, "build");
+removeSync(buildPath);
 
-const campaignPath = path.resolve(__dirname, "contracts", "Campaign.sol");
-const source = fs.readFileSync(campaignPath, "utf8");
-const output = solc.compile(source, 1).contracts;
+const campaignPath = resolve(__dirname, "contracts", "Campaign.sol");
+const source = readFileSync(campaignPath, "utf8");
+const output = compile(source, 1).contracts;
 
-fs.ensureDirSync(buildPath);
+ensureDirSync(buildPath);
 
-console.log(output);
 for (let contract in output) {
-  fs.outputJsonSync(
-    path.resolve(buildPath, contract.replace(":", "") + ".json"),
+  outputJsonSync(
+    resolve(buildPath, contract.replace(":", "") + ".json"),
     output[contract]
   );
 }
- 
