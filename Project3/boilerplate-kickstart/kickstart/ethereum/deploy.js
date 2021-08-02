@@ -1,14 +1,13 @@
-import HDWalletProvider from "truffle-hdwallet-provider";
-import Web3 from "web3";
-import  compiledFactory  from "./build/CampaignFactory.json";
+
+const HDWalletProvider = require("truffle-hdwallet-provider");
+const Web3 = require("web3");
+const compiledFactory = require("./build/CampaignFactory.json");
 
 const provider = new HDWalletProvider(
   "rather monkey range salad under link crouch prosper cram coconut beach assume",
-  "https://rinkeby.infura.io/v3/409c675de5164908b7b8dffe9573dca8"
-  
-  
-);
 
+  "https://rinkeby.infura.io/v3/409c675de5164908b7b8dffe9573dca8"
+);
 const web3 = new Web3(provider);
 
 const deploy = async () => {
@@ -25,3 +24,7 @@ const deploy = async () => {
   console.log("Contract deployed to", result.options.address);
 };
 deploy();
+
+
+
+
